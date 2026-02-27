@@ -1,8 +1,8 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Conta from './pages/Conta';
 import { ChakraProvider } from '@chakra-ui/react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
+import Conta from './pages/Conta';
+import Home from './pages/Home';
 
 function App() {
   return (
