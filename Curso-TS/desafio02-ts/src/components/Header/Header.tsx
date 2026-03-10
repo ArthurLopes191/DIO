@@ -1,10 +1,19 @@
-import { Box, Heading } from '@chakra-ui/react'
-import './Header.css'
+import { Box, Center, Text } from '@chakra-ui/react';
 
-export const Header  = () => {
-  return(
-    <Box width="100%" padding="4" className='header'>
-      <Heading size="2xl" color='white' >Dio Bank</Heading>
+import { useContext } from 'react';
+
+import { AppContext } from '../AppContext';
+import './Header.css';
+
+export const Header = () => {
+  
+  const context = useContext(AppContext)
+
+  return (
+    <Box backgroundColor="orange" >
+      <Center>
+        <Text fontSize="3xl">Dio Bank</Text>
+      </Center>
     </Box>
-  )
-}
+  );
+};
