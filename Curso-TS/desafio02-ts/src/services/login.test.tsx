@@ -1,33 +1,16 @@
-import { login } from "./login"
-
-const mockSetIsLoggedIn = jest.fn()
-const mockNavigate = jest.fn()
-
-jest.mock('react', () => ({
-    ...jest.requireActual('react'),
-    useContext: () => ({
-        setIsLoggedIn: mockSetIsLoggedIn
-    })
-}))
-
-jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom') as any,
-    useNavigate: () =>  mockNavigate
-}))
+import { login } from "./login";
 
 describe('login', () => {
 
     const mockEmail = 'arthur@dio.bank';
 
     it('Deve exibir um alert com boas vindas caso o email seja valido', async() => {
-        await login(mockEmail)
-        expect(mockSetIsLoggedIn).toHaveBeenCalledWith(true)
-        expect(mockNavigate).toHaveBeenCalledWith('/1')
+        const response = await login(mockEmail)
+        expect(response).toBeTruthy();
     })
 
     it('Deve exibir um erro caso o email seja invalido', async() => {
-        await login('email@invalido.com')
-        expect(mockSetIsLoggedIn).not.toHaveBeenCalled()
-        expect(mockNavigate).not.toHaveBeenCalledWith()
+        const response = await login('email@invalido.com')
+        expect(response).toBeFalsy()
     })
 })
