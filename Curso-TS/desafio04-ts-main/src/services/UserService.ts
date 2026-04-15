@@ -2,6 +2,7 @@ export interface User {
     name: string
     email: string
 }
+
 const db = [
     {
         name: "Joana",
@@ -18,16 +19,26 @@ export class UserService {
         this.db = database
     }
 
-     createUser = (name: string, email: string) => {
+    createUser = (name: string, email: string) => {
         const user = {
             name,
             email
         }
-        db.push(user)
-        console.log('DB atualizado', this.db)
-     }
 
-     getAllUsers = () => {
+        this.db.push(user)
+        console.log('DB atualizado', this.db)
+    }
+
+    getAllUsers = () => {
         return this.db
-     }
+    }
+
+    deleteUser = (email: string) => {
+    const index = this.db.findIndex(user => user.email === email)
+    if (index !== -1) {
+        this.db.splice(index, 1)
+    }
+    console.log('DB atualizado após delete', this.db)
 }
+}
+

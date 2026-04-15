@@ -1,12 +1,13 @@
 import { jest } from '@jest/globals';
-import { UserService } from "./UserService.js";
+import { User, UserService } from "./UserService.js";
 
 describe('UserService', () => {
-    const userService = new UserService();
+    const mockDb: User[] = []
+    const userService = new UserService(mockDb);
 
     it('Deve adicionar um novo usuário', () => {
         const mockConsole = jest.spyOn(global.console, 'log');
         userService.createUser('Nath', 'nath@test.com');
-        expect(mockConsole).toHaveBeenCalled
+        expect(mockConsole).toHaveBeenCalledWith('DB atualizado', mockDb)
     })
 })
