@@ -1,9 +1,11 @@
 import { Request } from 'express';
 import { makeMockResponse } from "../__mocks__/mockResponse.mock";
 import { UserController } from "./UserController";
+import { makeMockRequest } from '../__mocks__/mockRequest.mock';
 
 const mockUserService = {
-    createUser: jest.fn()
+    createUser: jest.fn(),
+    getUser: jest.fn()
 }
 
 jest.mock('../services/UserService', () => {
@@ -84,4 +86,16 @@ describe('UserController', () => {
     //     expect(mockResponse.state.status).toBe(200)
     //     expect(mockResponse.state.json).toMatchObject({message: 'Usuário deletado'})
     // })
+
+    it('Deve retornar o usuário com userId informado', () => {
+        const mockRequest = makeMockRequest({
+            params: {
+                userId: '123456'
+            }
+        })
+        const mockResponse = makeMockResponse()
+        userController.getUser(mockRequest, mockResponse)
+        expect(mockUserService.getUser).toHaveBeenCalledWith('123456')
+        expect(mockResponse.state.status).toBe(200)
+    })
 })
